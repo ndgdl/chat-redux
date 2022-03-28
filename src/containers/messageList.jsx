@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import { fetchMessages } from '../actions';
 
 import Message from '../components/message';
 
 class MessageList extends Component {
+  componentWillMount() {
+    this.props.fetchMessages(this.props.selectedChannel);
+  }
+
   renderMessages() {
     const { messages } = this.props;
 
@@ -26,10 +33,18 @@ class MessageList extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    { fetchMessages },
+    dispatch
+  );
+}
+
 function MapStateToProps(state) {
   return {
-    messages: state.messages
+    messages: state.messages,
+    selectedChannel: state.selectedChannel
   };
 }
 
-export default connect(MapStateToProps)(MessageList);
+export default connect(MapStateToProps, mapDispatchToProps)(MessageList);

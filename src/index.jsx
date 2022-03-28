@@ -3,7 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { logger} from 'redux-logger';
+import { logger } from 'redux-logger';
+import reduxPromise from 'redux-promise';
 
 // internal modules
 import App from './components/app';
@@ -41,7 +42,7 @@ const initialState = {
 };
 
 // render an instance of the component in the DOM
-const middlewares = applyMiddleware(logger);
+const middlewares = applyMiddleware(reduxPromise, logger);
 
 ReactDOM.render(
   <Provider store={createStore(reducers, initialState, middlewares)}>
