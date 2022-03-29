@@ -13,12 +13,11 @@ class MessageList extends Component {
 
   renderChannelTitle() {
     const { selectedChannel } = this.props;
-    return <h3>{selectedChannel[0].toUpperCase() + selectedChannel.slice(1)}</h3>
+    return <h3>{selectedChannel[0].toUpperCase() + selectedChannel.slice(1)}</h3>;
   }
 
   renderMessages() {
     const { messages } = this.props;
-
     return messages.map((message) => {
       return (
         <Message
