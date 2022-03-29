@@ -11,6 +11,11 @@ class MessageList extends Component {
     this.props.fetchMessages(this.props.selectedChannel);
   }
 
+  renderChannelTitle() {
+    const { selectedChannel } = this.props;
+    return <h3>{selectedChannel[0].toUpperCase() + selectedChannel.slice(1)}</h3>
+  }
+
   renderMessages() {
     const { messages } = this.props;
 
@@ -26,8 +31,11 @@ class MessageList extends Component {
 
   render() {
     return (
-      <div className="message-list">
-        {this.renderMessages()}
+      <div className="chatroom">
+        {this.renderChannelTitle()}
+        <div className="message-list">
+          {this.renderMessages()}
+        </div>
       </div>
     );
   }
