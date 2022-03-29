@@ -8,6 +8,16 @@ import Message from '../components/message';
 
 class MessageList extends Component {
   componentWillMount() {
+    this.fetchMessages();
+  }
+
+  componentDidMount() {
+    setInterval(() => {
+      this.fetchMessages();
+    }, 5000);
+  }
+
+  fetchMessages = () => {
     this.props.fetchMessages(this.props.selectedChannel);
   }
 
