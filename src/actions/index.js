@@ -12,16 +12,13 @@ export function fetchMessages(channel) {
   };
 }
 
-export function createMessage(channel, currentUser, message) {
-  const body = {
-    author: currentUser,
-    content: message
-  };
+export function createMessage(channel, author, content) {
+  const body = { author, content };
 
   const promise = fetch(`https://wagon-chat.herokuapp.com/${channel}/messages`, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)

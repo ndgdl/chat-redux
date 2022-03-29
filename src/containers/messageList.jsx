@@ -21,8 +21,8 @@ class MessageList extends Component {
     return messages.map((message) => {
       return (
         <Message
+          key={message.id}
           message={message}
-          key={message.created_at}
         />
       );
     });
