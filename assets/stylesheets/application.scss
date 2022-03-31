@@ -1,7 +1,181 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+// MAIN STRUCTURE //
+
 body {
   font-family: Helvetica;
 }
 .app {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  display: flex;
+  height: 100vh;
+  .navbar {
+    background-color: #DBDBDB;
+    height: 100%;
+    flex-basis: 80px;
+    min-width: 60px;
+    display: flex;
+    justify-content: center;
+    img {
+      margin-top: 15px;
+      max-height: 50px;
+      max-width: 50px;
+    }
+  }
+  .channel-list {
+    background-color: #F4F4F4;
+    flex-basis: 20%;
+  }
+  .chatroom {
+    flex-grow: 1;
+  }
+}
+
+// CHANNEL LIST STRUCTURE //
+
+.channel-list {
+  font-weight: 900;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  .chat-title {
+    flex-basis: 50px;
+    font-size: 18px;
+  }
+  .channels {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    gap: 10px;
+    button {
+      background: transparent;
+      border: none;
+      text-align: left;
+      font-weight: 500;
+      opacity: 0.7;
+    }
+    button:hover, .active {
+      font-weight: 900;
+      opacity: 1;
+    }
+  }
+}
+
+// CHATROOM STRUCTURE //
+
+.chatroom {
+  padding: 15px 30px;
+}
+
+.chatroom-content {
+  height: calc(100vh - 100px);
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 15px 0px;
+    height: 50px;
+    border-bottom: 1px solid #F7F7F7;
+  }
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: calc(100vh - 170px);
+  overflow-y: scroll;
+  .message {
+    margin-top: 15px;
+    p:last-child {
+      margin-top: 10px;
+    }
+    .author {
+      font-weight: 900;
+    }
+    .timestamp {
+      font-style: italic;
+      color: #848585;
+      font-weight: 600;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+  }
+}
+
+.message-form {
+  display: flex;
+  align-items: center;
+  form {
+    flex-grow: 1;
+    height: 60px;
+    display: flex;
+    input {
+      flex-grow: 1;
+      padding-left: 15px;
+      border-radius: 5px 0 0 5px;
+      border: 1px solid #848585;
+      &:focus {
+        box-shadow: 0 0 8px rgba(18, 15, 243, 0.2);
+        outline: none;
+      }
+    }
+    button {
+      border-radius: 0 5px 5px 0;
+      border: 1px solid #848585;
+      border-left: none;
+      background-color: #D23333;
+      color: white;
+      &:hover {
+        font-size: larger;
+        font-weight: 900;
+        transition: all 0.2s ease;
+      }
+    }
+  }
 }

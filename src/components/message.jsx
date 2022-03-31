@@ -6,10 +6,11 @@ const Message = (props) => {
   const time = new Date(message.created_at).toLocaleTimeString('fr-FR');
 
   return (
-    <div>
+    <div id={`message-${message.id}`} className="message">
       <p>
-        <strong>{message.author}</strong>
-        <small>- {time}</small></p>
+        <span className="author">{message.author}</span>
+        <span className="timestamp">{` - ${time}`}</span>
+      </p>
       <p>{message.content}</p>
     </div>
   );

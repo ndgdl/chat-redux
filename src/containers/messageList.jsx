@@ -12,18 +12,29 @@ class MessageList extends Component {
   }
 
   componentDidMount() {
+    this.goToLastMessage();
     setInterval(() => {
       this.fetchMessages();
+      this.goToLastMessage();
     }, 5000);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.messages.length !== nextProps.messages.length;
   }
 
   fetchMessages = () => {
     this.props.fetchMessages(this.props.selectedChannel);
   }
 
+  goToLastMessage = () => {
+    const messageList = document.querySelector('.message-list');
+    messageList.scroll(0, messageList.scrollHeight);
+  }
+
   renderChannelTitle() {
     const { selectedChannel } = this.props;
-    return <h3>{selectedChannel[0].toUpperCase() + selectedChannel.slice(1)}</h3>;
+    return <h3> Channel #{selectedChannel}</h3>;
   }
 
   renderMessages() {
@@ -40,9 +51,9 @@ class MessageList extends Component {
 
   render() {
     return (
-      <div className="chatroom">
+      <div className="chatroom-content">
         {this.renderChannelTitle()}
-        <div className="message-list">
+        <div className="message-list" ref={this.messageListRef}>
           {this.renderMessages()}
         </div>
       </div>
