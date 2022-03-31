@@ -14,6 +14,10 @@ class MessageForm extends Component {
     };
   }
 
+  componentDidMount() {
+    document.querySelector('input').focus();
+  }
+
   handleChange = (event) => {
     this.setState({ message: event.target.value });
   }
