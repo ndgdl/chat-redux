@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { emojify } from 'react-emojione';
 
 class Message extends Component {
   stringToColor = (username) => {
@@ -30,7 +31,7 @@ class Message extends Component {
           </span>
           <span className="timestamp">{` - ${time}`}</span>
         </p>
-        <p>{content}</p>
+        <p>{emojify(content)}</p>
       </div>
     );
   }
