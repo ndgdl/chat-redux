@@ -19,17 +19,15 @@ class MessageList extends Component {
     }, 5000);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.messages.length !== nextProps.messages.length;
-  }
-
   fetchMessages = () => {
     this.props.fetchMessages(this.props.selectedChannel);
   }
 
   goToLastMessage = () => {
     const messageList = document.querySelector('.message-list');
-    messageList.scroll(0, messageList.scrollHeight);
+    if (messageList) {
+      messageList.scroll(0, messageList.scrollHeight);
+    }
   }
 
   renderChannelTitle() {
@@ -39,14 +37,16 @@ class MessageList extends Component {
 
   renderMessages() {
     const { messages } = this.props;
-    return messages.map((message) => {
-      return (
-        <Message
-          key={message.id}
-          message={message}
-        />
-      );
-    });
+    if (messages) {
+      return messages.map((message) => {
+        return (
+          <Message
+            key={message.id}
+            message={message}
+          />
+        );
+      });
+    }
   }
 
   render() {
@@ -68,11 +68,11 @@ function mapDispatchToProps(dispatch) {
   );
 }
 
-function MapStateToProps(state) {
+function mapStateToProps(state) {
   return {
     messages: state.messages,
     selectedChannel: state.selectedChannel
   };
 }
 
-export default connect(MapStateToProps, mapDispatchToProps)(MessageList);
+export default connect(mapStateToProps, mapDispatchToProps)(MessageList);
