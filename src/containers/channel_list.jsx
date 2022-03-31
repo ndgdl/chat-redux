@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { selectChannel } from '../actions';
+import { selectChannel, fetchMessages } from '../actions';
 
 class ChannelList extends Component {
   renderChannel(channel) {
@@ -10,7 +10,10 @@ class ChannelList extends Component {
       <button
         key={channel}
         className={channel === this.props.selectedChannel ? "active" : ""}
-        onClick={() => this.props.selectChannel(channel)}
+        onClick={() => {
+          this.props.selectChannel(channel);
+          this.props.fetchMessages(channel);
+        }}
       >
         {`#${channel}`}
       </button>
@@ -34,7 +37,7 @@ class ChannelList extends Component {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { selectChannel },
+    { selectChannel, fetchMessages },
     dispatch
   );
 }
